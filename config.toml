@@ -1,8 +1,26 @@
-theme = "official_tokyonight_storm"
+theme = "catppuccin_macchiato"
 
 [editor]
 line-number = "relative"
 bufferline = "multiple"
+cursorline = true
+mouse = false
+auto-save = true
+color-modes = true
+true-color = true
+idle-timeout = 200
+
+[editor.statusline]
+left = ["mode", "spinner"]
+center = ["file-name"]
+right = ["diagnostics", "position-percentage", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.lsp]
+display-inlay-hints = true
 
 [editor.cursor-shape]
 insert = "bar"
@@ -12,11 +30,10 @@ select = "underline"
 [editor.file-picker]
 hidden = false
 
-[editor.statusline]
-left = ["mode", "spinner"]
-center = ["file-name"]
-right = ["diagnostics", "selections", "position", "position-percentage", "file-encoding", "file-line-ending", "file-type"]
-separator = "│"
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
 
 [keys.insert]
 j = { k = "normal_mode" }
