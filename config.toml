@@ -26,9 +26,6 @@ mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
 
-[editor.lsp]
-display-inlay-hints = true
-
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
@@ -41,6 +38,14 @@ hidden = false
 render = true
 character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
 skip-levels = 1
+
+[keys.normal]
+space.h = ":toggle lsp.display-inlay-hints"
+space.c = "toggle_comments"
+H = ":buffer-previous"
+L = ":buffer-next"
+X = "extend_line_above"
+C-c = "copy_selection_on_prev_line"
 
 [keys.insert]
 j = { k = "normal_mode" }
