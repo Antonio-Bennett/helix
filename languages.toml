@@ -1,4 +1,153 @@
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
+[language-server.vscode-json-language-server.config]
+provideFormatter = true
+json.keepLines.enable = true
+
+[language-server.phpactor]
+command = "phpactor"
+args = ["language-server"]
+
+[language-server.eslint]
+args = ["--stdio"]                        # should come by def with helix
+command = "vscode-eslint-language-server"
+
+[language-server.eslint.config]
+validate = "on"          # I assume this enabled eslit to validate the file, which now shows me counts for errors, warnings, etc in helix
+experimental = {}        # not sure why this is here
+rulesCustomizations = []
+run = "onType"
+# problems = { shortenToSingleLine = false }
+nodePath = "" # seems redundant, why do we need to override this, should get detected autom.
+
+# [language-server.eslint.config.codeAction]
+[language-server.eslint.config.codeAction.disableRuleComment]
+enable = true
+location = "separateLine"
+
+[language-server.eslint.config.codeAction.showDocumentation]
+enable = true # why?
+
+[language-server.eslint.config.codeActionOnSave]
+enable = true
+mode = "fixAll"
+
+[language-server.eslint.config.workingDirectory]
+mode = "auto" # do we need to override this?
+
+[language-server.typescript-language-server.config]
+documentFormatting = false # use eslint instead, do we have to override this ourselves? I think if eslint LSP is detected and enabled, this should be done automatically for us as generally everyone lets eslint take over linting+prettying, which uses prettier by default if detected by it
+
+[language-server.yaml-language-server.config.yaml]
+format = { enable = true }
+validation = true
+
 [[language]]
 name = "toml"
-formatter = {command = "taplo", args = ["fmt", "-"]}
+formatter = { command = "taplo", args = ["fmt", "-"] }
+auto-format = true
+
+[[language]]
+name = "html"
+language-servers = ["vscode-html-language-server", "tailwindcss-ls"]
+formatter = { command = 'prettier', args = ["--parser", "html"] }
+auto-format = true
+
+[[language]]
+name = "css"
+language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
+formatter = { command = 'prettier', args = ["--parser", "css"] }
+auto-format = true
+
+[[language]]
+name = "json"
+formatter = { command = 'prettier', args = ["--parser", "json"] }
+auto-format = true
+
+[[language]]
+name = "jsx"
+language-servers = [
+  { except-features = [
+    "format",
+  ], name = "typescript-language-server" },
+  "tailwindcss-ls",
+  "eslint",
+] # shouldn't need to override this
+roots = [
+  "package-lock.json",
+  "tsconfig.json",
+  ".prettierrc*",
+] # shouldn't need to override this
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "tsx"
+language-servers = [
+  { except-features = [
+    "format",
+  ], name = "typescript-language-server" },
+  "tailwindcss-ls",
+  "eslint",
+] # shouldn't need to override this
+roots = [
+  "package-lock.json",
+  "tsconfig.json",
+  ".prettierrc*",
+] # shouldn't need to override this
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "javascript"
+language-servers = [
+  { except-features = [
+    "format",
+  ], name = "typescript-language-server" },
+  "eslint",
+] # shouldn't need to override this
+roots = [
+  "package-lock.json",
+  "tsconfig.json",
+  ".prettierrc*",
+] # shouldn't need to override this
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "typescript"
+language-servers = [
+  { except-features = [
+    "format",
+  ], name = "typescript-language-server" },
+  "eslint",
+] # shouldn't need to override this
+roots = [
+  "package-lock.json",
+  "tsconfig.json",
+  ".prettierrc*",
+] # shouldn't need to override this
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "svelte"
+language-servers = ["svelteserver", "tailwindcss-ls"]
+auto-format = true
+# formatter = { command = 'prettier', args = ["--parser", ""] }
+
+[[language]]
+name = "graphql"
+formatter = { command = 'prettier', args = ["--parser", "graphql"] }
+auto-format = true
+
+[[language]]
+name = "php"
+auto-format = true
+# language-servers = ["phpactor"]
+
+[[language]]
+name = "yaml"
+language-servers = ["yaml-language-server"]
 auto-format = true
