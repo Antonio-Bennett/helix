@@ -151,3 +151,8 @@ auto-format = true
 name = "yaml"
 language-servers = ["yaml-language-server"]
 auto-format = true
+
+[[language]]
+name = "fish"
+formatter = { command = "fish_indent" }
+auto-format = true
